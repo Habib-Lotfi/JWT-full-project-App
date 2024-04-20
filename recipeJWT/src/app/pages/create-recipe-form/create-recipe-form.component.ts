@@ -23,7 +23,7 @@ import {MatRadioModule} from '@angular/material/radio';
 export class CreateRecipeFormComponent {
 
   recipeItem:any={
-    tite:"",
+    title:"",
     descrition:"",
     foodType:"",
     image:""
