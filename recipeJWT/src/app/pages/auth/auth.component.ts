@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 
+
 @Component({
   selector: 'app-auth',
   standalone: true,
@@ -23,15 +24,15 @@ import { MatRadioModule } from '@angular/material/radio';
   styleUrl: './auth.component.scss'
 })
 export class AuthComponent {
+[x: string]: any;
 
-  isRegister = false;
+  isRegister = true;
 
   registerationForm = new FormGroup({
     fullName: new FormControl("", [Validators.required]),
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [Validators.required, Validators.minLength(6)])
-
-  })
+  });
 
   loginForm = new FormGroup({
     email: new FormControl("", [Validators.required, Validators.email]),
@@ -39,13 +40,16 @@ export class AuthComponent {
 
   })
 
-  handleRegister(){
-    console.log("Register ", this.registerationForm.value)
+  handleRegister() {
+    console.log("Register ", this.registerationForm.value);
   }
+
   handleLogin(){
-    console.log("Register ", this.loginForm.value)
+    console.log("Login ", this.loginForm.value)
   }
 
-
+  togglePanel(){
+    this.isRegister = !this.isRegister
+  }
 
 }
