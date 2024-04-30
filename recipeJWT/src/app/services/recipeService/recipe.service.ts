@@ -25,6 +25,16 @@ export class RecipeService {
     })
   }
 
+  getRecipes(): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.get(`${this.baseUrl}/api/recipe`, { headers }).pipe(
+      tap((recipes) => {
+        const currentState = this.recipeSubject.value;
+        this.recipeSubject.next({ ...currentState, recipes});
+      })
+    );
+  }
+
   createRecipes(recipeData: any): Observable<any> {
     const headers = this.getHeaders();
     return this.http.post(`${this.baseUrl}/api/recipe`, recipeData, { headers }).pipe(

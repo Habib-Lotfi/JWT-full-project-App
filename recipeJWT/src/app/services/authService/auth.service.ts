@@ -16,7 +16,7 @@ export class AuthService {
   })
 
   login(userData: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/auth/signing`, userData)
+    return this.http.post<any>(`${this.baseUrl}/auth/signin`, userData)
   }
 
   register(userData: any): Observable<any> {
@@ -24,10 +24,10 @@ export class AuthService {
   }
 
   getUserProfile(): Observable<any> {
-    const headrs = new HttpHeaders({
+    const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem("jwt")}`
     })
-    return this.http.post<any>(`${this.baseUrl}/api/auth/signup`, { headrs })
+    return this.http.get<any>(`${this.baseUrl}/api/users/profile`, { headers })
       .pipe(tap((user) => {
         const currentState = this.authSubject.value;
         this.authSubject.next({ ...currentState, user })
